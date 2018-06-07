@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restaurants</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Advent+Pro" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3Pn5twRq0nGzwNJrbPFKIUhMmz7asH9s"> </script>
+<script>
+    var lats=[];
+    var longs=[];
+    function initLocations(){
+        let lat = document.getElementsByClassName("lat");
+        let lon= document.getElementsByClassName("long");
+        for(var l in lat){
+            lats.push(parseFloat(lat[l].innerText));
+        }
+        for(var lo in lon){
+            longs.push(parseFloat(lon[lo].innerText));
+        }
+        longs.pop();
+        longs.pop();
+        longs.pop();
+        lats.pop();
+        lats.pop();
+        lats.pop();
+    }
+
+    function initMap() {
+        var uluru = {lat: lats[0], lng: longs[0]};
+        var map = new google.maps.Map(document.getElementById('googleMap'), {
+          zoom: 14,
+          center: uluru
+        });
+
+        for (var aux in lats) {
+              var prueba = {lat: lats[aux], lng: longs[aux]};
+              var marker = new google.maps.Marker({
+              position: prueba,
+              map: map
+            });
+        }
+    }
+
+    google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Sacramento');
+
+.jumbotron {
+    background: linear-gradient(#080708, #DD1C1A);
+    color: #ffffff;
+    margin-bottom: 0%;
+}
+
+body {
+    background: linear-gradient(#DD1C1A, #080708);
+}
+
+.jumbotron h1 {
+    font-family: 'Sacramento', cursive;
+}
+
+.jumbotron p {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    word-spacing: -3.6px;
+    font-variant: small-caps;
+}
+
+.thumbnail {
+    padding: 0 0 0 0;
+    border: none;
+    border-radius: 0;
+}
+
+.navbar {
+    margin-bottom: 0;
+    z-index: 9999;
+    border: 0;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+
+    overflow: hidden;
+	background-color: black;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #D2D4C8 !important;
+    cursor: pointer;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.input-group{
+    margin-top:3%;
+}
+
+h2{
+    margin-top:3%;
+    margin-bottom:3%;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    word-spacing: -3.6px;
+    font-variant: small-caps;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.text {
+  background-color: black;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 20px;
+  color: white;
+  font-variant: small-caps;
+  padding: 16px 32px;
+}
+
+.navbar-brand{
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 30px;
+}
+
+
+/*-----Lista Restaurant------*/
+
+.navbar-brand{
+    font-family: 'Julius Sans One', sans-serif;
+    fot-size: 30px;
+}
+
+table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+    font-family: 'Tajawal', sans-serif;
+    letter-spacing: 3px;
+    font-size: 18px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    background-color: #7d1312;
+    font-weight: normal;
+}
+
+th {
+    text-align: center;
+    background-color: #560000;
+    color: white;
+}
+
+
+/*----Categorias--*/
+
+.dropdown, .dropup {
+    display: inline-block;
+}
+
+
+.dropdown-menu li a{
+    background-color: black;
+    font-family: 'Tajawal', sans-serif;
+    font-size:15px;
+    letter-spacing: 3px;
+    color:white;
+    filter: alpha(opacity=50);
+}
+
+#bt-categoria{
+
+    background-color: black;
+    background: rgba(0, 0, 0, 0.5);
+    color:white;
+
+    font-family: 'Julius Sans One', sans-serif;
+    letter-spacing: 4px;
+    border: none;
+}
+
+tr > .center-glyph{
+    text-align: center;
+}
+
+.center-glyph a{
+    color: white;
+}
+
+.center-glyph a:hover{
+    color: #D2D4C8 !important;
+}
+
+.plus{
+    color: white;
+}
+
+.plus :hover{
+    color: #D2D4C8 !important;
+}
+
+label{
+    margin-top:3%;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+.rankin{
+    color:yellow;
+}
+
+.findus{
+    text-align: center;
+}
+
+.findus h1{
+    font-family: 'Amatic SC', cursive;
+    font-size: 30px;
+    color: white;
+    margin: 0 auto;
+}
+
+</style>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/bienvenidos">TH</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="${'/showUserAccount'}">Perfil</a></li>
+                <li><a th:href="${'/logout'}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <h1>TengoHambre</h1>
+    <h2>Restaurantes</h2>
+
+
+    <div class="dropdown">
+        <button id="bt-categoria" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categorias
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="/usercategorysearch/100">Pizza</a></li>
+            <li><a href="/usercategorysearch/101">Comida Rapida</a></li>
+            <li><a href="/usercategorysearch/102">Heladeria</a></li>
+            <li><a href="/usercategorysearch/103">Comidas exóticas</a></li>
+            <li><a href="/usercategorysearch/104">Pastas</a></li>
+
+        </ul>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+<div id="tabla">
+    <table>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Telefono
+            </th>
+            <th>
+                Categoria
+            </th>
+
+            <th>
+                Opciones
+            </th>
+            <th>
+                <a class="rankin" href="/Order/Restaurants/admin">★↑</a>
+            </th>
+        </tr>
+
+        <tr th:each="restaurant : ${restList}">
+            <td th:text="${restaurant.name}">
+            </td>
+            <td th:text="${restaurant.phone}">
+            </td>
+            <td th:text="${restaurant.category.nombre}">
+            </td>
+            <td class="center-glyph">
+                <a th:href="${'/showRestaurantAdmin/' + restaurant.id}"><span class="glyphicon glyphicon-arrow-right "></span></a>
+                <a th:href="${'/editRestaurant/' + restaurant.id}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a th:href="${'/deleteRestaurant/' + restaurant.id}"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+            <td th:text="${restaurant.rankin}">
+            </td>
+            <label class="lat hidden" th:text="${restaurant.latitude}" ></label>
+            <label class="long hidden" th:text="${restaurant.longitud}" ></label>
+        </tr>
+    </table>
+    <script> initLocations() </script>
+    <label>Añadir restaurant     </label>
+    <a href="/newRestaurant" class="plus"><span class="glyphicon glyphicon-plus"></span></a>
+</div>
+
+</div>
+
+<div class="findus">
+    <br/>
+
+    <h1>Donde encontrarnos:</h1>
+    <br/>
+    <br/>
+    <div id="googleMap" style="width:100%;height:400px;"></div>
+
+</div>
+
+</body>
+</html>

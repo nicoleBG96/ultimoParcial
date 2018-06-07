@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3Pn5twRq0nGzwNJrbPFKIUhMmz7asH9s"> </script>
+<script>
+    function initMap() {
+        const lat = parseFloat(document.getElementById("lat").innerText);
+        const long = parseFloat(document.getElementById("long").innerText);
+        var uluru = {lat: lat, lng: long};
+        var map = new google.maps.Map(document.getElementById('googleMap'), {
+          zoom: 15,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Sacramento');
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background: linear-gradient(#080708, #DD1C1A);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/*------------------- Nav Bar ---------------------- */
+
+.navbar {
+    margin-bottom: 0;
+    z-index: 9999;
+    border: 0;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+
+    overflow: hidden;
+	background-color: black;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #D2D4C8 !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.input-group{
+    margin-top:3%;
+}
+
+.navbar-brand{
+    font-family: 'Julius Sans One', sans-serif;
+    fot-size: 30px;
+}
+
+/*-------------------------- Restaurant Column -------------------*/
+
+.col-sm-4{
+    background-color: black;
+    height: 100%;
+    color: white;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+
+
+    background-attachment: fixed;
+
+    padding-right:0 !important;
+}
+
+.contenido {
+    margin-top: 15%;
+}
+
+.col-sm-4 h1 {
+    text-align : center;
+    text-transform: uppercase;
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 63px;
+    letter-spacing: 3px;
+    padding: 5px;
+}
+
+.img-responsive{
+    padding: 10px;
+    margin: auto;
+}
+
+.like-div{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.like-div a{
+    color: white;
+    margin: 0 auto;
+}
+
+.like-div a:hover{
+    color: #E94F37 !important;
+}
+
+.like-div label{
+    color: white;
+    font-weight: normal;
+    margin: 0 auto;
+}
+
+.like-div label:hover{
+    color: white;
+}
+
+.comments {
+    text-align:left;
+    padding: 10px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    background-color:black;
+}
+
+.comments h3{
+    font-family: 'Amatic SC', cursive;
+}
+
+.comments p{
+    font-family: 'Tajawal', sans-serif;
+}
+
+.comentar{
+    text-align: center;
+    padding: 10px;
+}
+
+.clasificacion {
+    margin: 0 auto;
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    padding: 10px;
+}
+
+.clasificacion input[type="radio"] {
+  display: none;
+}
+
+.clasificacion label {
+  color: grey;
+  margin:0.2em;
+  font-size: 20px;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+.comment {
+    margin: 0 auto;
+    float: right;
+    background-color: #E94F37;
+    font-family: 'Amatic SC', cursive;
+    font-size: 20px;
+    margin-bottom:5%;
+}
+
+/*----------- Comment Modal -------------*/
+
+
+.modal-header{
+    color:white;
+    background-color: black;
+}
+
+.modal-header h4{
+    font-family: 'Amatic SC', cursive;
+    font-size: 30px;
+}
+
+.modal-footer{
+    background-color: black;
+}
+
+.modal-content button{
+    font-family: 'Tajawal', sans-serif;
+}
+
+/*------------------ Information --------------------*/
+
+.restaurant-info {
+    display: inline-block;
+    position: relative;
+    margin:0 auto;
+    padding: 5%;
+    /*margin-left: 10%;
+    width: 30%;*/
+    text-align: center;
+
+    border:1px solid white;
+    border-radius: 10px;
+
+    margin-top:5%;
+    margin-bottom:5%;
+}
+
+
+.restaurant-info h3{
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 20px;
+    font-family: 'Julius Sans One', sans-serif;
+    color: white;
+}
+
+.restaurant-info h2{
+    color: #E8E8E8;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+.restaurant-info p{
+    font-family: 'Tajawal', sans-serif;
+    color: #E8E8E8;
+    font-size: 20px;
+}
+
+
+.findus{
+    text-align: center;
+}
+
+.findus h1{
+    font-family: 'Amatic SC', cursive;
+    font-size: 30px;
+    color: white;
+    margin: 0 auto;
+}
+
+
+.borde{
+    border:1px solid white;
+    border-radius: 10px;
+    padding-left:2em;
+    padding-right:2em;
+    float:right;
+}
+
+
+/*----------------Stars--------------------*/
+
+.stars{
+    color: #DAA520;
+}
+
+.TH{
+    margin-top:9.666%;
+}
+
+.TH h1{
+   font-family: 'Sacramento', cursive;
+   color: white;
+   font-size: 63px;
+   padding: 5px;
+}
+
+</style>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/bienvenidos">TH</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a th:href="${'/showUserAccount'}">Perfil</a></li>
+                    <li><a th:href="${'/logout'}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row">
+        <!-- Added side nav -->
+        <div class="col-sm-4">
+            <div class="contenido">
+                <hr/>
+                <h1 th:text="${rest.name}"></h1>
+                <hr/>
+                <img class="img-responsive" th:src="${'/files/' + rest.name + '.jpg'}"/>
+                <p th:text="${rest.photo}"></p>
+                <h2 class="stars" th:text="${estrellas}"></h2>
+                <!-- likes -->
+                <div class="like-div">
+                    <label th:text="${rest.likes}"></label>
+                    <a th:href="${'/like/' + rest.id}"> <span class="glyphicon glyphicon-heart"></span> </a>
+
+
+                </div>
+                <!-- End likes -->
+
+                <!-- Comments -->
+                <div class = "comments">
+                    <h3>Comentarios:</h3>
+                    <p th:each="comment : ${rest.comments}" >
+                        <span th:text="${comment.user.username}"></span>
+                        <span th:text="${comment.text}"></span>
+                        <a th:href="${'/showUserFromComment/'+comment.user.username}">Ver perfil</a>
+                        <!--<span th:text="${comment.user.name}"></span>-->
+                        <br/>
+                    </p>
+                </div>
+                <!-- End comments -->
+                <div class="comentar">
+                    <button class="btn comment" data-toggle="modal" data-target="#myModal">Comentar</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- End side nav -->
+
+        <!-- Information Modal -->
+
+        <div class = "col-sm-8 d-flex justify-content-center text-center">
+
+            <div class="TH">
+                <hr/>
+                <h1>Tengo Hambre</h1>
+                <hr/>
+            </div>
+            <div class="text-center restaurant-info">
+                <h3>Informacion</h3>
+                <h2>Teléfono</h2>
+                <p th:text="${rest.phone}"></p>
+                <h2>Categoría</h2>
+                <p th:text="${rest.category.nombre}"></p>
+                <h2>Ciudad</h2>
+                <p th:text="${rest.city.nombre}"></p>
+                <h2>Descripción</h2>
+                <p th:text="${rest.description}"></p>
+            </div>
+        </div>
+
+
+        <!-- End Information Modal -->
+    </div>
+<!-- Comment modal -->
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4 class="modal-title">Comentar</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/comment" class="form-group" method="POST" >
+                        <div class="clasificacion">
+                            <input style="display: none;" id="radio1" type="radio" name="estrellas" th:value="5"/>
+                            <label for="radio1">★</label>
+                            <input style="display: none;" id="radio2" type="radio" name="estrellas" th:value="4"/>
+                            <label for="radio2">★</label>
+                            <input style="display: none;" id="radio3" type="radio" name="estrellas" th:value="3"/>
+                            <label for="radio3">★</label>
+                            <input style="display: none;" id="radio4" type="radio" name="estrellas" th:value="2"/>
+                            <label for="radio4">★</label>
+                            <input style="display: none;" id="radio5" type="radio" name="estrellas" th:value="1"/>
+                            <label for="radio5">★</label>
+                        </div>
+                        <input type="hidden" name="restaurant" th:value="${rest.id}"></input>
+                        <input type="hidden" name="user" th:value="${use.id}"></input>
+                        <textarea class="form-control" name="text" id="text" cols="30" rows="1"></textarea>
+                        <br/>
+                        <button class="btn btn-default" name="Submit" value="Login" type="Submit" th:text="Guardar"></button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<!-- End comment modal -->
+    <div class="findus">
+        <br/>
+
+        <h1>Donde encontrarnos:</h1>
+        <br/>
+        <br/>
+        <label id="lat" th:text="${rest.latitude}" class="hidden"></label>
+        <label id="long" th:text="${rest.longitud}" class="hidden"></label>
+        <div id="googleMap" style="width:100%;height:400px;"></div>
+
+    </div>
+
+
+</body>
+</html>

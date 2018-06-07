@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Advent+Pro" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Sacramento');
+
+.jumbotron {
+    background: linear-gradient(#080708, #DD1C1A);
+    color: #ffffff;
+    diplay: inline-block;
+}
+
+.jumbotron h1 {
+    font-family: 'Sacramento', cursive;
+    text-align : center;
+}
+
+
+.jumbotron p {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
+    letter-spacing: 5px;
+    word-spacing: -3.6px;
+    font-variant: small-caps;
+}
+
+.thumbnail {
+    padding: 0 0 0 0;
+    border: none;
+    border-radius: 0;
+}
+
+.navbar {
+    margin-bottom: 0;
+    z-index: 9999;
+    border: 0;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+
+    overflow: hidden;
+	background-color: black;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #D2D4C8 !important;
+    cursor: pointer;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.input-group{
+    margin-top:3%;
+}
+
+h2{
+    margin-top:3%;
+    margin-bottom:3%;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 30px;
+    letter-spacing: 5px;
+    word-spacing: -3.6px;
+    font-variant: small-caps;
+    margin-left:200px;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.text {
+  background-color: #0000007d;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 20px;
+  color: white;
+  font-variant: small-caps;
+  padding: 16px 32px;
+}
+
+.navbar-brand{
+    font-family: 'Julius Sans One', sans-serif;
+    fot-size: 30px;
+}
+
+#editar{
+    margin-left:200px;
+}
+
+.text{
+    color: white;
+    font-weight: bold;
+}
+
+.select{
+    color: black;
+    font-weight: bold;
+}
+
+.vermas{
+    padding: 10px 25px;
+    color: white;
+    font-size: 20px;
+    background-color: black;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-variant: small-caps;
+    border: none;
+}
+
+.vermas:hover {
+    color: #D2D4C8 !important;
+    text-decoration: none;
+}
+
+
+</style>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/bienvenidos">TH</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="${'/showUserAccount'}">Perfil</a></li>
+                <li><a th:href="${'/logout'}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <hr/>
+    <h1>TengoHambre</h1>
+    <hr/>
+    <h2>Editar Restaurante</h2>
+    <div id="editar">
+        <form action="/restaurant" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${rest.id}"/>
+            <input type="hidden" name="likes" th:value="${rest.likes}"/>
+            <p>Ingrese nuevo nombre de restaurante:</p>
+            <textarea name="name" th:text="${rest.name}" id="name" class="text" cols="30" rows="3">
+    </textarea>
+            <br/>
+            <p>Ingrese nuevo telefono de restaurante:</p>
+            <textarea name="phone" th:text="${rest.phone}" id="phone" class="text" cols="30" rows="3">
+    </textarea>
+            <br/>
+            <p>Ingrese nueva descripción de restaurante:</p>
+            <textarea name="description" th:text="${rest.description}" id="description" class="text" cols="30" rows="5">
+    </textarea>
+            <br/>
+            <p>Seleccione tipo:</p>
+            <select name="category" class="select">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.nombre}"
+                        th:selected="(${category.id} == ${rest.category.id})"></option>
+            </select>
+            <br/>
+            <p>Seleccione ciudad:</p>
+            <select name="city" class="select">
+                <option th:each="city : ${cities}"
+                        th:value="${city.id}"
+                        th:text="${city.nombre}"
+                        th:selected="(${city.id} == ${rest.city.id})"></option>
+            </select>
+
+            <br/>
+            <br/>
+            <img th:src="${'/files/' + rest.name + '.jpg'}" height= "200" width= "200" />
+            <div>
+                <p>Cambiar foto:</p>
+                <input type="file" name="file"/>
+            </div>
+            <br/>
+            <br/>
+            <p>Ingrese nuevo valor de latitud:</p>
+            <textarea name="latitude" th:text="${rest.latitude}" id="latitude" class="text" cols="30" rows="3">
+    </textarea>
+            <br/>
+            <br/>
+            <p>Ingrese nuevo valor de longitud:</p>
+            <textarea name="longitud" th:text="${rest.longitud}" id="longitud" class="text" cols="30" rows="3">
+    </textarea>
+            <br/>
+            <br/>
+            <input type="submit" value="Guardar" class="vermas"></input>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,450 @@
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Advent+Pro" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function buscar() {
+            const nombre = document.getElementById("input-buscarRes").value;
+            location.href = "/publicSearch/"+ nombre;
+        }
+
+        function pizzaCategory() {
+            location.href = "/categorysearch/"+ 100;
+        }
+
+        function fastfoodCategory() {
+            location.href = "/categorysearch/"+ 101;
+        }
+
+        function icecreamCategory() {
+            location.href = "/categorysearch/"+ 102;
+        }
+
+        function restElis() {
+            location.href = "/showRestaurantPublic/"+ 50;
+        }
+
+        function restBK() {
+            location.href = "/showRestaurantPublic/" + 51;
+        }
+
+        function restTC() {
+            location.href = "/showRestaurantPublic/" + 52;
+        }
+
+        function cochabambaCity(){
+               location.href="/citysearch/"+50;
+        }
+
+        function laPazCity(){
+               location.href="/citysearch/"+51;
+        }
+
+        function santaCruzCity(){
+               location.href="/citysearch/"+52;
+        }
+
+        function sucreCity(){
+               location.href="/citysearch/"+53;
+        }
+
+         function oruroCity(){
+               location.href="/citysearch/"+54;
+        }
+
+         function pandoCity(){
+               location.href="/citysearch/"+55;
+        }
+
+        function tarijaCity(){
+               location.href="/citysearch/"+56;
+        }
+
+         function beniCity(){
+               location.href="/citysearch/"+57;
+        }
+
+         function potosiCity(){
+               location.href="/citysearch/"+58;
+        }
+
+        $(document).ready(function(){
+            $("#myBtn").click(function(){
+                $("#myModal").modal();
+            });
+        });
+
+    </script>
+
+</head>
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Sacramento');
+
+.jumbotron {
+    background: radial-gradient(#DD1C1A,#080708);
+    color: #ffffff;
+}
+
+.jumbotron h1 {
+    font-family: 'Sacramento', cursive;
+}
+
+.jumbotron p {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    word-spacing: -3.6px;
+    font-variant: small-caps;
+}
+
+.thumbnail {
+    padding: 0 0 0 0;
+    border: none;
+    border-radius: 0;
+}
+
+.thumbnail img {
+    width: 100%;
+    margin-bottom: 10px;
+    height:250px;
+}
+
+
+
+
+
+
+.navbar {
+    margin-bottom: 0;
+    z-index: 9999;
+    border: 0;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+
+    overflow: hidden;
+	background-color: black;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #D2D4C8 !important;
+    cursor: pointer;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.input-group{
+    margin-top:3%;
+}
+
+h2{
+    margin-top:3%;
+    margin-bottom:3%;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    word-spacing: -3.6px;
+    font-variant: small-caps;
+    font-weight: normal;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+
+.middle {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.thumbnail:hover .image {
+  opacity: 0.6;
+}
+
+.thumbnail:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: black;
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing: 3px;
+  color: white;
+  font-variant: small-caps;
+  padding: 16px 32px;
+  cursor: pointer;
+}
+
+.navbar-brand{
+    font-family: 'Julius Sans One', sans-serif;
+    fot-size: 30px;
+}
+
+.vermas{
+    padding: 10px 25px;
+    float: right;
+    color: white;
+    font-size: 15px;
+    background-color: black;
+    font-family: 'Julius Sans One', sans-serif;
+
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+.vermas:hover {
+    color: #D2D4C8 !important;
+    text-decoration: none;
+}
+
+
+
+.modal-header, h4, .close {
+
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 20px !important;
+    letter-spacing: 4px;
+
+    background-color: black;
+    color:white !important;
+    text-align: center;
+    font-size: 20px;
+}
+
+.modal-footer {
+    background-color: black;
+}
+
+.modal-footer a{
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 20px !important;
+    text-decoration: none;
+    letter-spacing: 4px;
+    color:white !important;
+}
+
+.modal-footer a:hover{
+    color: #D2D4C8;
+}
+
+
+.city{
+    padding: 10px 25px;
+    color: white;
+    font-size: 15px;
+    background-color: black;
+    font-family: 'Julius Sans One', sans-serif;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+.city:hover{
+    color:grey;
+    text-decoration: none;
+}
+
+</style>
+
+
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/welcome">TH</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="myBtn">Iniciar sesion</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <h1>TengoHambre</h1>
+    <p>Restaurantes en tu ciudad</p>
+    <form class="form-inline">
+        <div class="input-group">
+            <input class="form-control" size="50" placeholder="Que quieres comer?" id="input-buscarRes"/>
+            <div class="input-group-btn">
+                <a class="btn btn-danger" onclick="buscar()"><span class="glyphicon glyphicon-search"></span></a>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> Login </h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form th:action="@{/login}" method="POST" class="form-signin">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username"  th:placeholder="username"
+                                   class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password"  th:placeholder="Password"
+                                   id="password" name="password" class="form-control" />
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block btn-danger" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/registration}" method="get">
+                        <a href="/registration">Sign Up</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-fluid text-center bg-grey">
+        <h2>Categorias</h2>
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="https://bit.ly/2I1nTWK" class="image" alt="100"/>
+                    <div class="middle">
+                        <div class="text" onclick="pizzaCategory()">Pizza</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="https://bit.ly/2rC1SD8" class="image" alt="101"/>
+                    <div class="middle">
+                        <div class="text" onclick="fastfoodCategory()">Comida rapida</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="https://bit.ly/2GfReHd" class="image" alt="102"/>
+                    <div class="middle">
+                        <div class="text" onclick="icecreamCategory()">Heladeria</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <a class="vermas" href="/publicCategories">Ver mas categorias</a>
+        <br/>
+        <br/>
+        <!-- new row-->
+        <div class="row text-center">
+            <h2>Restaurantes</h2>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="https://bit.ly/2xh9vF2" class="image" alt="Elis"/>
+
+                    <div class="middle">
+                        <div class="text" onclick="restElis()">Elis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="https://bit.ly/2s9HYA8" class="image" alt="Burger King"/>
+                    <div class="middle">
+                        <div class="text" onclick="restBK()">Burger King</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="https://bit.ly/2INJiPs" class="image" alt="Tropical Chicken"/>
+                    <div class="middle">
+                        <div class="text" onclick="restTC()">Tropical Chicken</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <a class="vermas" href="/publicRestaurants">Ver mas restaurantes</a>
+        <br/>
+        <br/>
+        <div class="row text-center">
+
+            <h2>Ciudades</h2>
+            <br/><br/>
+            <div class="col-sm-4">
+
+                    <a class="city" onclick="cochabambaCity()">Cochabamba</a>
+                    <br/>
+                    <br/>
+                    <a class="city" onclick="tarijaCity()">Tarija</a>
+                    <br/>
+                    <br/>
+                    <a class="city" onclick="sucreCity()">Sucre</a>
+
+            </div>
+            <div class="col-sm-4">
+
+                    <a class="city" onclick="santaCruzCity()">Santa Cruz</a>
+                    <br/>
+                    <br/>
+                    <a class="city" onclick="beniCity()">Beni</a>
+                    <br/>
+                    <br/>
+                    <a class="city" onclick="pandoCity()">Pando</a>
+
+            </div>
+            <div class="col-sm-4">
+
+                    <a class="city" onclick="laPazCity()">La Paz</a>
+                    <br/>
+                    <br/>
+                    <a class="city" onclick="oruroCity()">Oruro</a>
+                    <br/>
+                    <br/>
+                    <a class="city" onclick="potosiCity()">Potosi</a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
