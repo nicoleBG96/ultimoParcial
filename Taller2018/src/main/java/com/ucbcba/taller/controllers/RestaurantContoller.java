@@ -3,11 +3,7 @@ package com.ucbcba.taller.controllers;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.ucbcba.taller.entities.*;
-import com.ucbcba.taller.services.CategoryService;
-import com.ucbcba.taller.services.CityService;
-import com.ucbcba.taller.services.RestaurantService;
-import com.ucbcba.taller.services.UploadFileService;
-import com.ucbcba.taller.services.UserService;
+import com.ucbcba.taller.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.text.AttributedString;
 import java.util.ArrayList;
@@ -30,9 +27,8 @@ public class RestaurantContoller {
     private RestaurantService restaurantService;
     private CategoryService categoryService;
     private CityService cityService;
-
-    @Autowired
     private UserService userService;
+    private CommentService commentService;
 
     @Autowired
     public void setRestaurantService(RestaurantService restaurantService) {
@@ -48,6 +44,14 @@ public class RestaurantContoller {
     public void setCityService(CityService cityService) {
         this.cityService = cityService;
     }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setCommentService(CommentService commentService){this.commentService=commentService;}
 
     @Autowired
     private UploadFileService uploadFileService;
@@ -116,6 +120,82 @@ public class RestaurantContoller {
     }
 
 
+  Integer contarComentariosRestaurant(List<Restaurant> restaurantList,Integer id){
+        for(int i=0;i<restaurantList.size()-1;i++) {
+            if (restaurantList.get(i).getId() == id) {
+                restaurantList.get(i).setComentarios(restaurantList.get(i).getComments().size());
+            }
+            return restaurantList.get(i).getComentarios();
+        }
+      return -1;
+    }
+
+    List<Restaurant> contarComentariosRestaurantes(List<Restaurant> restaurantList){
+        for(int i=0;i<restaurantList.size();i++)
+        {
+            restaurantList.get(i).setComentarios(contarComentariosRestaurant(restaurantList,restaurantList.get(i).getId()));
+        }
+        return restaurantList;
+    }
+
+    List<Restaurant> ordenarRestaurantes(List<Restaurant> restaurantList)
+    {
+        contarComentariosRestaurantes(restaurantList);
+        Restaurant aux;
+        for(int i=0;i<restaurantList.size();i++)
+        {
+            for(int j=0;j<restaurantList.size();j++)
+            {
+                if(restaurantList.get(i).getComentarios()<restaurantList.get(j).getComentarios())
+                {
+                    aux = restaurantList.get(i);
+                    restaurantList.set(i,restaurantList.get(j));
+                    restaurantList.set(j,aux);
+                }
+            }
+        }
+        return restaurantList;
+    }
+
+
+    List<User> ordenarUsuarios(List<User> userList)
+    {
+        contarComentariosUsuarios(userList);
+        User aux;
+        for(int i=0;i<userList.size();i++)
+        {
+            for(int j=0;j<userList.size();j++)
+            {
+                if(userList.get(i).getComentarios()<userList.get(j).getComentarios())
+                {
+                    aux = userList.get(i);
+                    userList.set(i,userList.get(j));
+                    userList.set(j,aux);
+                }
+            }
+        }
+        return userList;
+    }
+
+    Integer contarComentariosUsuario(List<User> userList,Long id){
+        for(int i=0;i<userList.size()-1;i++) {
+            if (userList.get(i).getId() == id) {
+                userList.get(i).setComentarios(userList.get(i).getComments().size());
+            }
+            return userList.get(i).getComentarios();
+        }
+        return -1;
+    }
+
+    List<User> contarComentariosUsuarios(List<User> userList){
+        for(int i=0;i<userList.size();i++)
+        {
+            userList.get(i).setComentarios(contarComentariosUsuario(userList,userList.get(i).getId()));
+        }
+        return userList;
+    }
+
+
     @RequestMapping(value = "/restaurant", method = RequestMethod.POST)
     String save(@RequestParam("file")MultipartFile file,Restaurant restaurant) {
         try {
@@ -143,6 +223,54 @@ public class RestaurantContoller {
         else {
             return "redirect:/Restaurants";
         }
+    }
+
+    @RequestMapping(value="/topUsuario/{id}")
+    public String ordenarUsuarios(@PathVariable Integer id,@PathVariable String x,Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByUsername(auth.getName());
+        List<User> userList=(List<User>)userService.listAllUsers();
+        model.addAttribute("userList",ordenarUsuarios(userList));
+        if(x.equals("public"))
+        {
+            return "showRestaurantsPublic";
+
+        }
+        if(x.equals("user"))
+        {
+            return "showRestaurantsUser";
+        }
+        if(x.equals("admin"))
+        {
+            return "showRestaurantsUser";
+        }
+        System.out.println(id);
+        System.out.println(ordenarUsuarios(userList).size());
+        return "welcome";
+    }
+
+    @RequestMapping(value="/topRestaurant/{id}")
+    public String ordenarRestaurantes(@PathVariable Integer id,@PathVariable String x,Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByUsername(auth.getName());
+        List<Restaurant> restList=(List<Restaurant>)restaurantService.listAllRestaurants();
+        model.addAttribute("restList",ordenarRestaurantes(restList));
+        if(x.equals("public"))
+        {
+            return "showRestaurantsPublic";
+
+        }
+        if(x.equals("user"))
+        {
+            return "showRestaurantsUser";
+        }
+        if(x.equals("admin"))
+        {
+            return "showRestaurantsUser";
+        }
+        System.out.println(id);
+        System.out.println(ordenarRestaurantes(restList).size());
+        return "welcome";
     }
 
     @RequestMapping(value = "/Order/Restaurants/{x}",method = RequestMethod.GET)

@@ -31,6 +31,8 @@ public class Restaurant {
 
     private Float longitud;
 
+    private Integer comentarios;
+
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<User> userslikes;
@@ -172,4 +174,12 @@ public class Restaurant {
             }
         }
      }
+
+    public Integer getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Integer comentarios) {
+        this.comentarios = comentarios;
+    }
 }

@@ -16,6 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
+    private Integer comentarios;
     private String password;
     @Transient
     private String passwordConfirm;
@@ -108,4 +109,12 @@ public class User {
     public List<Comment> getComments(){return comments;}
 
     public void setComments(List<Comment> comments){this.comments=comments;}
+
+    public Integer getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Integer comentarios) {
+        this.comentarios = comentarios;
+    }
 }
